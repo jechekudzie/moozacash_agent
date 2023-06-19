@@ -107,33 +107,38 @@
                     <!-- Recent Activity
                     =============================== -->
 
-                    <h3 class="text-5 fw-400 d-flex align-items-center px-4 mb-4">Recent Activity</h3>
+                    <h3 class="text-5 fw-400 d-flex align-items-center px-4 mb-4">Transaction History</h3>
 
                     <div class="bg-white shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Phone Name</th>
-                                    <th>ID Number</th>
-                                    <th>Transact</th>
+                                    <th>Order #</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach()
-
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td>{{ $order->number }}</td>
+                                        <td>
+                                            @if($order->sender == \Illuminate\Support\Facades\Auth::id())
+                                                Sent to {{ \App\Models\User::find($order->recipient)->name }}
+                                            @elseif($order->recipient == \Illuminate\Support\Facades\Auth::id())
+                                                Received from {{ \App\Models\User::find($order->sender)->name }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $order->amount }}</td>
+                                        <td>{{ $order->status }}</td>
+                                        <td>{{ date('d-M-Y', strtotime($order->created_at)) }}</td>
+                                        <td>Update | Cancel</td>
+                                    </tr>
                                 @endforeach
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
