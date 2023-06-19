@@ -84,9 +84,7 @@ Route::post('/currency/convert', [CurrencyConverterController::class, 'convertPa
 //orders routes
 Route::post('/orders/create', [OrderController::class, 'createOrder']);
 
-
 //ADMIN ROUTES HERE
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-
 
 require __DIR__ . '/auth.php';
