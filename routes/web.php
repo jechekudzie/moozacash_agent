@@ -11,11 +11,13 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
+use Twilio\Rest\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,54 @@ Route::post('accept-deposit', function (Request $request) {
 
     $order->agent = $user->id;
     $order->status = 'accepted';
+
+    $sender = User::find($order->sender);
+    $recipient = User::find($order->recipient);
+
+    // Send the OTP via SMS
+    $sid = env('TWILIO_SID');
+    $token = env('TWILIO_AUTH_TOKEN');
+    $twilioNumber = env('TWILIO_FROM');
+
+    $client = new Client($sid, $token);
+    $client->messages->create($recipient->number, // to
+        array(
+            "from" => $twilioNumber,
+            "body" => $sender->name . " has sent you :" . $order->amount . " " . $order->currency . " with the order number " . $order->number . ".Collect from any MoozaCash Booth thank you.",
+        )
+    );
+
+    $order->save();
+
+    return back();
+});
+
+Route::post('cash-pickup', function (Request $request) {
+
+    $user = Auth::user();
+
+    //find order by order number
+    $order = Order::where('number', '=', $request->order)->first();
+
+    $order->agent2 = $user->id;
+    $order->status = 'collected';
+
+    $sender = User::find($order->sender);
+    $recipient = User::find($order->recipient);
+
+    // Send the OTP via SMS
+    $sid = env('TWILIO_SID');
+    $token = env('TWILIO_AUTH_TOKEN');
+    $twilioNumber = env('TWILIO_FROM');
+
+    $client = new Client($sid, $token);
+    $client->messages->create($sender->number, // to
+        array(
+            "from" => $twilioNumber,
+            "body" => $recipient->name . " has collected :" . $order->amount . " which you sent via MoozaCash.",
+        )
+    );
+
     $order->save();
 
     return back();
@@ -124,6 +174,13 @@ Route::middleware(['auth', 'checkOTP'])->group(function () {
     //AGENT ROUTES HERE
     Route::middleware(['role:Agent'])->group(function () {
         Route::get('/agent/dashboard', [AdminController::class, 'dashboard']);
+    });
+
+    Route::middleware(['role:Admin'])->group(function () {
+        Route::get('/admin/dashboard', [AdminController::class, 'dashboardAdmin']);
+        Route::get('/admin/users', [AdminController::class, 'dashboardAdminUsers']);
+        Route::get('/admin/user/{slug}', [AdminController::class, 'dashboardAdminUser']);
+        Route::post('/admin/users/roles-permissions/update', [AdminController::class, 'updateRolesPermissions'])->name('user.roles.permissions.update');
     });
 });
 

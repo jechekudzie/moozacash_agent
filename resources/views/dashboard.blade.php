@@ -136,7 +136,7 @@
                                         <td>{{ $order->amount }}</td>
                                         <td>{{ $order->status }}</td>
                                         <td>{{ date('d-M-Y', strtotime($order->created_at)) }}</td>
-                                        <td>Update | Cancel</td>
+                                        <td>View</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
