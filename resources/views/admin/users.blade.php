@@ -89,7 +89,7 @@
                             <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
                                 Cancel
                             </button>
-                            <input type="hidden" name="order" id="inputNumber">
+                            <input type="hidden" name="agent" id="inputNumber">
                             <button type="submit" class="btn btn-alt-primary" data-bs-dismiss="modal">
                                 Confirm
                             </button>
@@ -123,6 +123,7 @@
         //launch modal on confirm-link click
         $('.updateFloat').on('click', function (e) {
             e.preventDefault();
+            $('#inputNumber').val($(this).data('id'));
             $('#modal-normal').modal('show');
         });
 

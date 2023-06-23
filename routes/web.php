@@ -57,6 +57,16 @@ Route::post('verify-number', function (Request $request) {
     }
 });
 
+Route::post('update-float', function (Request $request) {
+
+    $user = User::findOrFail($request->agent);
+    $user->agent_float = $request->float;
+    $user->float_period = now();
+    $user->save();
+
+    return back();
+});
+
 Route::post('accept-deposit', function (Request $request) {
 
     $user = Auth::user();
