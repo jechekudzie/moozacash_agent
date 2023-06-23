@@ -145,9 +145,10 @@
                                         <td>{{ $beneficiary->number }}</td>
                                         <td>{{ $beneficiary->national_id }}</td>
                                         <td>
-                                            <button type="button" style="padding: 0px 10px"
-                                                    class="btn btn-primary btn-sm">Send Now
-                                            </button>
+                                            <a href="{{ url('transactions/send-money?r='.$beneficiary->slug) }}"
+                                               type="button" style="padding: 0px 10px"
+                                               class="btn btn-primary btn-sm">Send Now
+                                            </a>
                                         </td>
                                         <td>
                                             <a href="">Edit</a> &nbsp;|&nbsp;

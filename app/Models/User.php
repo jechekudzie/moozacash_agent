@@ -26,6 +26,7 @@ class User extends Authenticatable
         'number',
         'national_id',
         'password',
+        'OTP',
     ];
 
     /**

@@ -1026,7 +1026,7 @@ hljs.registerLanguage('1c', function(hljs){
 
   // общий паттерн для определения идентификаторов
   var UNDERSCORE_IDENT_RE = '[A-Za-zА-Яа-яёЁ_][A-Za-zА-Яа-яёЁ_0-9]+';
-  
+
   // v7 уникальные ключевые слова, отсутствующие в v8 ==> keyword
   var v7_keywords =
   'далее ';
@@ -1038,7 +1038,7 @@ hljs.registerLanguage('1c', function(hljs){
 
   // keyword : ключевые слова
   var KEYWORD = v7_keywords + v8_keywords;
-  
+
   // v7 уникальные директивы, отсутствующие в v8 ==> meta-keyword
   var v7_meta_keywords =
   'загрузитьизфайла ';
@@ -1055,7 +1055,7 @@ hljs.registerLanguage('1c', function(hljs){
   // v7 системные константы ==> built_in
   var v7_system_constants =
   'разделительстраниц разделительстрок символтабуляции ';
-  
+
   // v7 уникальные методы глобального контекста, отсутствующие в v8 ==> built_in
   var v7_global_context_methods =
   'ansitooem oemtoansi ввестивидсубконто ввестиперечисление ввестипериод ввестиплансчетов выбранныйплансчетов ' +
@@ -1069,7 +1069,7 @@ hljs.registerLanguage('1c', function(hljs){
   'префиксавтонумерации пропись пустоезначение разм разобратьпозициюдокумента рассчитатьрегистрына ' +
   'рассчитатьрегистрыпо симв создатьобъект статусвозврата стрколичествострок сформироватьпозициюдокумента ' +
   'счетпокоду текущеевремя типзначения типзначениястр установитьтана установитьтапо фиксшаблон шаблон ';
-  
+
   // v8 методы глобального контекста ==> built_in
   var v8_global_context_methods =
   'acos asin atan base64значение base64строка cos exp log log10 pow sin sqrt tan xmlзначение xmlстрока ' +
@@ -1164,7 +1164,7 @@ hljs.registerLanguage('1c', function(hljs){
   v7_system_constants +
   v7_global_context_methods + v8_global_context_methods +
   v8_global_context_property;
-  
+
   // v8 системные наборы значений ==> class
   var v8_system_sets_of_values =
   'webцвета windowsцвета windowsшрифты библиотекакартинок рамкистиля символы цветастиля шрифтыстиля ';
@@ -1316,7 +1316,7 @@ hljs.registerLanguage('1c', function(hljs){
   'кодировкаименфайловвzipфайле методсжатияzip методшифрованияzip режимвосстановленияпутейфайловzip режимобработкиподкаталоговzip ' +
   'режимсохраненияпутейzip уровеньсжатияzip ';
 
-  // v8 системные перечисления - 
+  // v8 системные перечисления -
   // Блокировка данных, Фоновые задания, Автоматизированное тестирование,
   // Доставляемые уведомления, Встроенные покупки, Интернет, Работа с двоичными данными ==> class
   var v8_system_enums_other =
@@ -1435,7 +1435,7 @@ hljs.registerLanguage('1c', function(hljs){
 
   // literal : примитивные типы
   var LITERAL = 'null истина ложь неопределено';
-  
+
   // number : числа
   var NUMBERS = hljs.inherit(hljs.NUMBER_MODE);
 
@@ -1456,10 +1456,10 @@ hljs.registerLanguage('1c', function(hljs){
       }
     ]
   };
-  
+
   // comment : комментарии
   var COMMENTS = hljs.inherit(hljs.C_LINE_COMMENT_MODE);
-  
+
   // meta : инструкции препроцессора, директивы компиляции
   var META = {
     className: 'meta',
@@ -1470,13 +1470,13 @@ hljs.registerLanguage('1c', function(hljs){
       COMMENTS
     ]
   };
-  
+
   // symbol : метка goto
   var SYMBOL = {
     className: 'symbol',
     begin: '~', end: ';|:', excludeEnd: true
-  };  
-  
+  };
+
   // function : объявление процедур и функций
   var FUNCTION = {
     className: 'function',
@@ -1528,7 +1528,7 @@ hljs.registerLanguage('1c', function(hljs){
       NUMBERS,
       STRINGS,
       DATE
-    ]  
+    ]
   }
 });
 
@@ -3153,7 +3153,7 @@ hljs.registerLanguage('autohotkey', function(hljs) {
         ]
       },
       {
-        className: 'meta', 
+        className: 'meta',
         begin: '^\\s*#\\w+', end:'$',
         relevance: 0
       },
@@ -16183,7 +16183,7 @@ hljs.registerLanguage('nsis', function(hljs) {
       keyword:
       'Abort AddBrandingImage AddSize AllowRootDirInstall AllowSkipFiles AutoCloseWindow BGFont BGGradient BrandingText BringToFront Call CallInstDLL Caption ChangeUI CheckBitmap ClearErrors CompletedText ComponentText CopyFiles CRCCheck CreateDirectory CreateFont CreateShortCut Delete DeleteINISec DeleteINIStr DeleteRegKey DeleteRegValue DetailPrint DetailsButtonText DirText DirVar DirVerify EnableWindow EnumRegKey EnumRegValue Exch Exec ExecShell ExecShellWait ExecWait ExpandEnvStrings File FileBufSize FileClose FileErrorText FileOpen FileRead FileReadByte FileReadUTF16LE FileReadWord FileSeek FileWrite FileWriteByte FileWriteUTF16LE FileWriteWord FindClose FindFirst FindNext FindWindow FlushINI FunctionEnd GetCurInstType GetCurrentAddress GetDlgItem GetDLLVersion GetDLLVersionLocal GetErrorLevel GetFileTime GetFileTimeLocal GetFullPathName GetFunctionAddress GetInstDirError GetLabelAddress GetTempFileName Goto HideWindow Icon IfAbort IfErrors IfFileExists IfRebootFlag IfSilent InitPluginsDir InstallButtonText InstallColors InstallDir InstallDirRegKey InstProgressFlags InstType InstTypeGetText InstTypeSetText Int64Cmp Int64CmpU Int64Fmt IntCmp IntCmpU IntFmt IntOp IntPtrCmp IntPtrCmpU IntPtrOp IsWindow LangString LicenseBkColor LicenseData LicenseForceSelection LicenseLangString LicenseText LoadLanguageFile LockWindow LogSet LogText ManifestDPIAware ManifestSupportedOS MessageBox MiscButtonText Name Nop OutFile Page PageCallbacks PageExEnd Pop Push Quit ReadEnvStr ReadINIStr ReadRegDWORD ReadRegStr Reboot RegDLL Rename RequestExecutionLevel ReserveFile Return RMDir SearchPath SectionEnd SectionGetFlags SectionGetInstTypes SectionGetSize SectionGetText SectionGroupEnd SectionIn SectionSetFlags SectionSetInstTypes SectionSetSize SectionSetText SendMessage SetAutoClose SetBrandingImage SetCompress SetCompressor SetCompressorDictSize SetCtlColors SetCurInstType SetDatablockOptimize SetDateSave SetDetailsPrint SetDetailsView SetErrorLevel SetErrors SetFileAttributes SetFont SetOutPath SetOverwrite SetRebootFlag SetRegView SetShellVarContext SetSilent ShowInstDetails ShowUninstDetails ShowWindow SilentInstall SilentUnInstall Sleep SpaceTexts StrCmp StrCmpS StrCpy StrLen SubCaption Unicode UninstallButtonText UninstallCaption UninstallIcon UninstallSubCaption UninstallText UninstPage UnRegDLL Var VIAddVersionKey VIFileVersion VIProductVersion WindowIcon WriteINIStr WriteRegBin WriteRegDWORD WriteRegExpandStr WriteRegMultiStr WriteRegNone WriteRegStr WriteUninstaller XPStyle',
       literal:
-      'admin all auto both bottom bzip2 colored components current custom directory false force hide highest ifdiff ifnewer instfiles lastused leave left license listonly lzma nevershow none normal notset off on open print right show silent silentlog smooth textonly top true try un.components un.custom un.directory un.instfiles un.license uninstConfirm user Win10 Win7 Win8 WinVista zlib'
+      'agent all auto both bottom bzip2 colored components current custom directory false force hide highest ifdiff ifnewer instfiles lastused leave left license listonly lzma nevershow none normal notset off on open print right show silent silentlog smooth textonly top true try un.components un.custom un.directory un.instfiles un.license uninstConfirm user Win10 Win7 Win8 WinVista zlib'
     },
     contains: [
       hljs.HASH_COMMENT_MODE,
@@ -19982,7 +19982,7 @@ hljs.registerLanguage('sqf', function(hljs) {
         'addPublicVariableEventHandler addRating addResources addScore addScoreSide addSecondaryWeaponItem ' +
         'addSwitchableUnit addTeamMember addToRemainsCollector addTorque addUniform addVehicle addVest ' +
         'addWaypoint addWeapon addWeaponCargo addWeaponCargoGlobal addWeaponGlobal addWeaponItem ' +
-        'addWeaponPool addWeaponTurret admin agent agents AGLToASL aimedAtTarget aimPos airDensityRTD ' +
+        'addWeaponPool addWeaponTurret agent agent agents AGLToASL aimedAtTarget aimPos airDensityRTD ' +
         'airplaneThrottle airportSide AISFinishHeal alive all3DENEntities allAirports allControls ' +
         'allCurators allCutLayers allDead allDeadMen allDisplays allGroups allMapMarkers allMines ' +
         'allMissionObjects allow3DMode allowCrewInImmobile allowCuratorLogicIgnoreAreas allowDamage ' +
@@ -20350,7 +20350,7 @@ hljs.registerLanguage('sql', function(hljs) {
         keywords: {
           keyword:
             'as abort abs absolute acc acce accep accept access accessed accessible account acos action activate add ' +
-            'addtime admin administer advanced advise aes_decrypt aes_encrypt after agent aggregate ali alia alias ' +
+            'addtime agent administer advanced advise aes_decrypt aes_encrypt after agent aggregate ali alia alias ' +
             'all allocate allow alter always analyze ancillary and anti any anydata anydataset anyschema anytype apply ' +
             'archive archived archivelog are as asc ascii asin assembly assertion associate asynchronous at atan ' +
             'atn2 attr attri attrib attribu attribut attribute attributes audit authenticated authentication authid ' +

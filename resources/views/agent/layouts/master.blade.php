@@ -21,12 +21,12 @@
     <link href="images/favicon.png" rel="icon"/>
 
     <link rel="stylesheet"
-          href="{{ asset('admin/assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
+          href="{{ asset('agent/assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet"
-          href="{{ asset('admin/assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
+          href="{{ asset('agent/assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
     <link rel="stylesheet"
-          href="{{ asset('admin/assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
-    <link rel="stylesheet" id="css-main" href="{{ asset('admin/assets/css/codebase.min.css') }}">
+          href="{{ asset('agent/assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('agent/assets/css/codebase.min.css') }}">
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
     <!-- END Stylesheets -->
@@ -387,7 +387,7 @@
               <span class="smini-visible fw-bold tracking-wide fs-lg">
                 c<span class="text-primary">b</span>
               </span>
-                    <a class="fw-bold tracking-wide mx-auto" href="{{ url('/admin/dashboard') }}">
+                    <a class="fw-bold tracking-wide mx-auto" href="{{ url('/agent/dashboard') }}">
                         <img
                             src="{{ asset('images/logo.png') }}" style="width: 70%" alt="MoozaCash Logo"/>
                     </a>
@@ -443,7 +443,7 @@
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ url('/admin/dashboard') }}">
+                            <a class="nav-main-link" href="{{ url('/agent/dashboard') }}">
                                 <i class="nav-main-link-icon fa fa-house-user"></i>
                                 <span class="nav-main-link-name">Dashboard</span>
                             </a>
@@ -521,20 +521,20 @@
     <!-- END Footer -->
 </div>
 <!-- END Page Container -->
-
-<script src="{{ asset('admin/assets/js/codebase.app.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/lib/jquery.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons-jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/pages/be_tables_datatables.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/codebase.app.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/lib/jquery.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons-jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('agent/assets/js/pages/be_tables_datatables.min.js') }}"></script>
+@stack('scripts')
 </body>
 </html>

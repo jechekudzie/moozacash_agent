@@ -47,9 +47,16 @@
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Select a Beneficiary</label>
                                 <select name="recipient" class="form-control select2">
-                                    @foreach(\Illuminate\Support\Facades\Auth::user()->beneficiaries()->get() as $beneficiary)
-                                        <option value="{{ $beneficiary->id }}">{{ $beneficiary->name }}</option>
-                                    @endforeach
+                                    @if($recipient == null)
+                                        @foreach(\Illuminate\Support\Facades\Auth::user()->beneficiaries()->get() as $beneficiary)
+                                            <option value="{{ $beneficiary->id }}">{{ $beneficiary->name }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach(\Illuminate\Support\Facades\Auth::user()->beneficiaries()->get() as $beneficiary)
+                                            <option
+                                                {{ $beneficiary->id == $recipient->id ? 'selected' : '' }} value="{{ $beneficiary->id }}">{{ $beneficiary->name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="mb-3">

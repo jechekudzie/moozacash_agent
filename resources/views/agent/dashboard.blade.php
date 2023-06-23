@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('agent.layouts.master')
 
 @section('content')
 
@@ -96,7 +96,14 @@
                                 <td>{{ \App\Models\User::find($order->recipient)->name }}</td>
                                 <td>{{ $order->amount }}</td>
                                 <td>{{ $order->status }}</td>
-                                <td><a href="">Confirm</a></td>
+                                <td><a href="#"
+                                       class="confirm-link"
+                                       data-sender="{{ \App\Models\User::find($order->sender)->name }}"
+                                       data-idnumber="{{ \App\Models\User::find($order->sender)->national_id }}"
+                                       data-recipient="{{ \App\Models\User::find($order->recipient)->name }}"
+                                       data-amount="{{ $order->amount }}"
+                                       data-order="{{ $order->number }}"
+                                    >Confirm</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -110,4 +117,112 @@
     </main>
     <!-- END Main Container -->
 
+    <!-- Normal Modal -->
+    <div class="modal" id="modal-normal" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Confirm this Transaction</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+
+                        <div class="block-content">
+                            <table class="table table-vcenter">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Detail</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Sender</th>
+                                    <td id="sendTd"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ID Number</th>
+                                    <td id="idTd"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Recipient</th>
+                                    <td id="recipientTd"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Order Number</th>
+                                    <td id="orderTd"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Amount</th>
+                                    <td id="amountTd"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <form method="post" action="{{ url('accept-deposit') }}">
+                        @csrf
+                        <div class="block-content block-content-full block-content-sm text-end border-top mt-5">
+                            <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                            <input type="hidden" name="order" id="inputNumber">
+                            <button type="submit" class="btn btn-alt-primary" data-bs-dismiss="modal">
+                                Confirm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Normal Modal -->
+
 @endsection
+
+<!--javascript push here and stack on master page-->
+@push('scripts')
+    <script>
+
+        //set up csrf for laravel ajax
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+        });
+
+        $('#youSendCurrency').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            console.log($(this).val());
+        });
+
+        //modal-normal
+
+        //launch modal on confirm-link click
+        $('.confirm-link').on('click', function (e) {
+            e.preventDefault();
+            let sender = $(this).data('sender');
+            let idnumber = $(this).data('idnumber');
+            let recipient = $(this).data('recipient');
+            let amount = $(this).data('amount');
+            let order = $(this).data('order');
+
+            //assign values to table cells
+            $('#sendTd').text(sender);
+            $('#idTd').text(idnumber);
+            $('#recipientTd').text(recipient);
+            $('#amountTd').text(amount);
+            $('#orderTd').text(order);
+            $('#inputNumber').val(order);
+
+
+            $('#modal-normal').modal('show');
+        });
+
+    </script>
+@endpush
+

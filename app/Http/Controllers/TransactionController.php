@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -21,7 +22,13 @@ class TransactionController extends Controller
     public function create()
     {
         //display the send money form here
-        return view('transactions.create');
+        $recipient = null;
+        if (request()->has('r')) {
+            //get the recipient to preload in the form from the query string
+            $recipient = User::whereSlug(request()->r)->firstOrFail();
+        }
+
+        return view('transactions.create')->with('recipient', $recipient);
 
     }
 

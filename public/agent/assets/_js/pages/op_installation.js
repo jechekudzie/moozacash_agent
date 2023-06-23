@@ -36,7 +36,7 @@ class pageInstallation {
         },
         'install-admin-password-confirm': {
           required: true,
-          equalTo: '#install-admin-password'
+          equalTo: '#install-agent-password'
         }
       },
       messages: {
