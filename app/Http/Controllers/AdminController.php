@@ -44,7 +44,27 @@ class AdminController extends Controller
     {
         $user = User::whereSlug($user)->firstOrFail();
         $roles = Role::all();
-        return view('admin.user')->with('user', $user)->with('roles', $roles);
+
+        //get float data and display as well if user is an agent
+        if ($user->hasRole('Agent')) {
+            $float = $user->agent_float;
+
+            //get sum of all entry amount after the agent_period date of type withdrawal
+            $withdrawals = Entry::where('user_id', $user->id)->where('type', 'withdrawal')->where('created_at', '>', $user->float_period)->sum('amount');
+
+            //now get deposits
+            $deposits = Entry::where('user_id', $user->id)->where('type', 'deposit')->where('created_at', '>', $user->float_period)->sum('amount');
+
+            //add float to deposits
+            $float = $float + $deposits;
+
+            //deduct withdrawals from float
+            $float = $float - $withdrawals;
+        } else {
+            $float = 0;
+        }
+
+        return view('admin.user')->with('user', $user)->with('roles', $roles)->with('float', $float);
     }
 
     public function updateRolesPermissions(Request $request)
