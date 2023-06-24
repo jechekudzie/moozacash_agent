@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -11,7 +12,10 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('agent.dashboard');
+        $float = Auth::user()->agent_float;
+
+
+        return view('agent.dashboard')->with('float', $float);
     }
 
     public function dashboardAdmin()

@@ -16,7 +16,8 @@
                                 <i class="fa fa-wallet fa-2x opacity-25"></i>
                             </div>
                             <div>
-                                <div class="fs-3 fw-semibold">$780</div>
+                                <div
+                                    class="fs-3 fw-semibold">{{ \Illuminate\Support\Facades\Auth::user()->agent_float }}</div>
                                 <div class="fs-sm fw-semibold text-uppercase text-muted">Float</div>
                             </div>
                         </div>

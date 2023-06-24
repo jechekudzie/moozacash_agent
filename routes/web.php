@@ -88,6 +88,14 @@ Route::post('accept-deposit', function (Request $request) {
     $sender = User::find($order->sender);
     $recipient = User::find($order->recipient);
 
+    //create new entry of type deposit
+    $entry = new Entry();
+    $entry->amount = $order->amount;
+    $entry->user_id = Auth::id();
+    $entry->type = 'deposit';
+    $entry->description = 'Deposit: ' . $sender->name . ' to ' . $recipient->name;
+    $entry->save();
+
     // Send the OTP via SMS
     $sid = env('TWILIO_SID');
     $token = env('TWILIO_AUTH_TOKEN');
@@ -118,6 +126,13 @@ Route::post('cash-pickup', function (Request $request) {
 
     $sender = User::find($order->sender);
     $recipient = User::find($order->recipient);
+
+    $entry = new Entry();
+    $entry->amount = $order->amount;
+    $entry->user_id = Auth::id();
+    $entry->type = 'withdrawal';
+    $entry->description = 'Withdrawal: ' . $recipient->name . ' from ' . $sender->name;
+    $entry->save();
 
     // Send the OTP via SMS
     $sid = env('TWILIO_SID');
@@ -191,7 +206,7 @@ Route::middleware(['auth', 'checkOTP'])->group(function () {
     Route::post('/orders/create', [OrderController::class, 'createOrder']);
 
     //AGENT ROUTES HERE
-    Route::middleware(['role:Agent'])->group(function () {
+    Route::middleware(['role:Agent', 'auth', 'checkOTP'])->group(function () {
         Route::get('/agent/dashboard', [AdminController::class, 'dashboard']);
     });
 
