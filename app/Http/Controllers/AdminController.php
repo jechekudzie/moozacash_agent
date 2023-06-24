@@ -46,7 +46,7 @@ class AdminController extends Controller
         $roles = Role::all();
 
         //get float data and display as well if user is an agent
-        if ($user->hasRole('Agent')) {
+        if ($user->hasRole('Agent') && $user->agent_float != null) {
             $float = $user->agent_float;
 
             //get sum of all entry amount after the agent_period date of type withdrawal
