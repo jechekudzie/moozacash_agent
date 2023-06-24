@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entry;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,17 @@ class AdminController extends Controller
     {
         $float = Auth::user()->agent_float;
 
+        //get sum of all entry amount after the agent_period date of type withdrawal
+        $withdrawals = Entry::where('user_id', Auth::user()->id)->where('type', 'withdrawal')->where('created_at', '>', Auth::user()->float_period)->sum('amount');
+
+        //now get deposits
+        $deposits = Entry::where('user_id', Auth::user()->id)->where('type', 'deposit')->where('created_at', '>', Auth::user()->float_period)->sum('amount');
+
+        //add float to deposits
+        $float = $float + $deposits;
+
+        //deduct withdrawals from float
+        $float = $float - $withdrawals;
 
         return view('agent.dashboard')->with('float', $float);
     }

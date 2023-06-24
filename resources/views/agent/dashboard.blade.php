@@ -17,7 +17,7 @@
                             </div>
                             <div>
                                 <div
-                                    class="fs-3 fw-semibold">{{ \Illuminate\Support\Facades\Auth::user()->agent_float }}</div>
+                                    class="fs-3 fw-semibold">{{ $float }}</div>
                                 <div class="fs-sm fw-semibold text-uppercase text-muted">Float</div>
                             </div>
                         </div>
