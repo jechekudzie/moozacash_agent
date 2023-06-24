@@ -31,8 +31,9 @@
                                 <i class="fa fa-clipboard fa-2x opacity-25"></i>
                             </div>
                             <div>
-                                <div class="fs-3 fw-semibold">1500</div>
-                                <div class="fs-sm fw-semibold text-uppercase text-muted">History</div>
+                                <div
+                                    class="fs-3 fw-semibold">{{ count(\App\Models\Order::where('agent', \Illuminate\Support\Facades\Auth::id())->get()) }}</div>
+                                <div class="fs-sm fw-semibold text-uppercase text-muted">Historical Deposits</div>
                             </div>
                         </div>
                     </a>
@@ -45,8 +46,9 @@
                                 <i class="fa fa-envelope-open fa-2x opacity-25"></i>
                             </div>
                             <div>
-                                <div class="fs-3 fw-semibold">15</div>
-                                <div class="fs-sm fw-semibold text-uppercase text-muted">Messages</div>
+                                <div
+                                    class="fs-3 fw-semibold">{{ count(\App\Models\Order::where('agent2', \Illuminate\Support\Facades\Auth::id())->get()) }}</div>
+                                <div class="fs-sm fw-semibold text-uppercase text-muted">Disbursements</div>
                             </div>
                         </div>
                     </a>

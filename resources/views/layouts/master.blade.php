@@ -79,6 +79,12 @@
                                         href="{{ url('/transactions/send-money') }}">Send Money</a></li>
                                 <li @if(request()->routeIs('add_beneficiaries')) class="active" @endif><a
                                         href="{{ url('/transactions/beneficiaries') }}">Beneficiaries</a></li>
+                                @if(\Illuminate\Support\Facades\Auth::user()->hasRole('Agent'))
+                                    <li><a href="{{ url('/agent/dashboard') }}">Agent Portal</a></li>
+                                @endif
+                                @if(\Illuminate\Support\Facades\Auth::user()->hasRole('Admin'))
+                                    <li><a href="{{ url('/admin/dashboard') }}">Admin</a></li>
+                                @endif
                                 <li><a href="help.html">Help</a></li>
                             </ul>
                         </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Models\Entry;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -63,6 +64,14 @@ Route::post('update-float', function (Request $request) {
     $user->agent_float = $request->float;
     $user->float_period = now();
     $user->save();
+
+    //save the entry
+    $entry = new Entry();
+    $entry->amount = $request->float;
+    $entry->user_id = $request->agent;
+    $entry->type = 'deposit';
+    $entry->description = 'Agent float';
+    $entry->save();
 
     return back();
 });
