@@ -99,19 +99,8 @@
                             <li class="dropdown notifications"><a class="dropdown-toggle" href="#"><span class="text-5"><i
                                             class="far fa-bell"></i></span><span class="count">3</span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="text-center text-3 py-2">Notifications (3)</li>
-                                    <li class="dropdown-divider mx-n3"></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-bell"></i>A new digital FIRC
-                                            document is available for you to download<span
-                                                class="text-1 text-muted d-block">22 Jul 2021</span></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-bell"></i>Updates to our
-                                            privacy policy. Please read.<span class="text-1 text-muted d-block">04 March 2021</span></a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-bell"></i>Update about Payyed
-                                            fees<span class="text-1 text-muted d-block">18 Feb 2021</span></a></li>
-                                    <li class="dropdown-divider mx-n3"></li>
                                     <li><a class="dropdown-item text-center text-primary px-0"
-                                           href="notifications.html">See all Notifications</a></li>
+                                           href="#">See all Notifications</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown profile ms-2"><a class="px-0 dropdown-toggle" href="#"><img

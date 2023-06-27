@@ -399,9 +399,13 @@
                                    href="be_pages_generic_profile.html">{{ \Illuminate\Support\Facades\Auth::user()->name  }}</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="link-fx text-dual" href="op_auth_signin.html">
-                                    <i class="fa fa-sign-out-alt"></i>
-                                </a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="link-fx text-dual"
+                                            style="background: none; border: none; padding: 0;">
+                                        <i class="fa fa-sign-out-alt"></i>
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>
