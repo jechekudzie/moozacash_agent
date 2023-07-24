@@ -211,7 +211,17 @@ Route::middleware(['auth', 'checkOTP'])->group(function () {
     });
 
     Route::middleware(['role:Admin'])->group(function () {
+        Route::get('/exchange-rates', 'App\Http\Controllers\ExchangeRateController@index')->name('exchange-rates.index');
+        Route::get('/exchange-rates/create', 'App\Http\Controllers\ExchangeRateController@create')->name('exchange-rates.create');
+        Route::post('/exchange-rates', 'App\Http\Controllers\ExchangeRateController@store')->name('exchange-rates.store');
+        Route::get('/exchange-rates/{exchangeRate}/edit', 'App\Http\Controllers\ExchangeRateController@edit')->name('exchange-rates.edit');
+        Route::put('/exchange-rates/{exchangeRate}', 'App\Http\Controllers\ExchangeRateController@update')->name('exchange-rates.update');
+        Route::delete('/exchange-rates/{exchangeRate}', 'App\Http\Controllers\ExchangeRateController@destroy')->name('exchange-rates.destroy');
+    });
+
+    Route::middleware(['role:Admin'])->group(function () {
         Route::get('/admin/dashboard', [AdminController::class, 'dashboardAdmin']);
+        Route::get('/admin/exchange-rates', [AdminController::class, 'exchangeRates']);
         Route::get('/admin/users', [AdminController::class, 'dashboardAdminUsers']);
         Route::get('/admin/user/{slug}', [AdminController::class, 'dashboardAdminUser']);
         Route::post('/admin/users/roles-permissions/update', [AdminController::class, 'updateRolesPermissions'])->name('user.roles.permissions.update');

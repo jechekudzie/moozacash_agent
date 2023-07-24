@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entry;
+use App\Models\ExchangeRate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,12 @@ class AdminController extends Controller
     public function dashboardAdminUsers()
     {
         return view('admin.users');
+    }
+
+    public function exchangeRates()
+    {
+        $rates = ExchangeRate::all();
+        return view('admin.rates')->with('exchangeRates', $rates);
     }
 
     public function dashboardAdminUser($user)

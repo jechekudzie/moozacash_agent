@@ -62,18 +62,22 @@
                             <div class="mb-3">
                                 <label for="youSend" class="form-label">You Send</label>
                                 <div class="input-group">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text">FROM</span>
                                     <input type="text" class="form-control" data-bv-field="youSend" id="youSend"
-                                           onkeyup="getConversionRate(this.value, 1)"
+                                           onkeyup="currencyConverter(this.value, 1)"
                                            value="1,000" name="fromAmount" placeholder="">
                                     <span class="input-group-text p-0">
                     <select name="from" id="youSendCurrency" data-style="form-select bg-transparent border-0"
                             data-container="body"
                             data-live-search="true" class="selectpicker form-control bg-transparent" required="">
-                      <option data-icon="currency-flag currency-flag-usd me-1" data-subtext="United States dollar"
-                              selected="selected" value="">USD</option>
-                         <option data-icon="currency-flag currency-flag-zar me-1" data-subtext="South African rand"
-                                 value="">ZAR</option>
+                         <option data-icon="currency-flag currency-flag-usd me-1"
+                                 data-rate="1"
+                                 selected="selected" value="">USD</option>
+                        @foreach(\App\Models\ExchangeRate::all() as $rate)
+                            <option data-icon="currency-flag currency-flag-{{ strtolower($rate->currency_code) }} me-1"
+                                    data-rate="{{ $rate->rate }}"
+                                    selected="selected" value="">{{ $rate->currency_code }}</option>
+                        @endforeach
                     </select>
                     </span>
                                 </div>
@@ -81,19 +85,23 @@
                             <div class="mb-3">
                                 <label for="recipientGets" class="form-label">Recipient Gets</label>
                                 <div class="input-group">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text">TO &nbsp;&nbsp; &nbsp;&nbsp;</span>
                                     <input type="text" class="form-control" data-bv-field="recipientGets"
-                                           onkeyup="getConversionRate(this.value, 2)"
+                                           onkeyup="currencyConverter(this.value, 2)"
                                            id="recipientGets" value="1,410.06" name="toAmount" placeholder="">
                                     <span class="input-group-text p-0">
 
                     <select name="to" id="recipientCurrency" data-style="form-select bg-transparent border-0"
                             data-container="body" data-live-search="true"
                             class="selectpicker form-control bg-transparent" required="">
-                            <option data-icon="currency-flag currency-flag-usd me-1" data-subtext="United States dollar"
-                                    value="">USD</option>
-                            <option data-icon="currency-flag currency-flag-zar me-1" data-subtext="South African rand"
-                                    value="">ZAR</option>
+                            <option data-icon="currency-flag currency-flag-usd me-1"
+                                    data-rate="1"
+                                    selected="selected" value="">USD</option>
+                        @foreach(\App\Models\ExchangeRate::all() as $rate)
+                            <option data-icon="currency-flag currency-flag-{{ strtolower($rate->currency_code) }} me-1"
+                                    data-rate="{{ $rate->rate }}"
+                                    selected="selected" value="">{{ $rate->currency_code }}</option>
+                        @endforeach
                     </select>
                     </span>
                                 </div>
@@ -141,37 +149,37 @@
             console.log($(this).val());
         });
 
-        //make ajax request
-        function getConversionRate(from, control) {
-            var fees = 0;
-            var amount = 0
-
-            if (control == 1) {
-                var from = parseFloat(from);
-                amount = $('#recipientGets').val((from * 18.19).toFixed(2));
-                fees = (from * 0.05).toFixed(2);
-                $('#fees').html(fees);
+        //currency conversion logic here
+        function currencyConverter(amount, control) {
+            if (control === 1) {
+                var e = document.getElementById("youSendCurrency");
+                var option = e.options[e.selectedIndex];
+                var rate = option.getAttribute('data-rate');
+                var b = document.getElementById("recipientCurrency");
+                var option2 = b.options[b.selectedIndex];
+                var rate2 = option2.getAttribute('data-rate');
+                const amountInCur = 1 / rate;
+                const amountInToCurrency = amountInCur * rate2 * amount;
+                $('#recipientGets').val(amountInToCurrency.toFixed(2));
             } else {
-                var from = parseFloat(from);
-                amount = $('#youSend').val((from / 18.19).toFixed(2));
-                fees = (from * 0.05).toFixed(2);
-                fees = $('#fees').html(fees);
+                var e = document.getElementById("recipientCurrency");
+                var option = e.options[e.selectedIndex];
+                var rate = option.getAttribute('data-rate');
+
+
+                var b = document.getElementById("youSendCurrency");
+                var option2 = b.options[b.selectedIndex];
+                var rate2 = option2.getAttribute('data-rate');
+
+
+                const amountInCur = 1 / rate;
+                const amountInToCurrency = amountInCur * rate2 * amount;
+
+                console.log(amountInToCurrency);
+
+                $('#youSend').val(amountInToCurrency.toFixed(2));
             }
-
-            total = parseFloat(from) + parseFloat(fees);
-            $('#amount').val(total);
-            $('#totalFees').html(total);
         }
-
-        $(document).ready(function () {
-            $('.select2').select2();
-        });
-
-        //onclick event submit form $('#createOrder').
-        $('#createOrder').click(function () {
-            var form = $('#form-send-money');
-            form.submit();
-        });
 
     </script>
 @endpush
